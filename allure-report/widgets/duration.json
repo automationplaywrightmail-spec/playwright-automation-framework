@@ -1,0 +1,1 @@
+[{"uid":"af739368913c0cdb","name":"Adding to cart","time":{"start":1762274879979,"stop":1762274883255,"duration":3276},"status":"passed","severity":"critical"},{"uid":"35e3c85d71f1cd12","name":"login to page","time":{"start":1762274879981,"stop":1762274882895,"duration":2914},"status":"passed","severity":"normal"}]

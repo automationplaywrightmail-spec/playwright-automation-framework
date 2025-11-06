@@ -1,0 +1,39 @@
+{
+  "compilerOptions": {
+    /* Language and Environment */
+    "target": "ESNext",
+    "lib": ["ESNext", "DOM"],
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+
+    /* Type Checking */
+    "strict": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    
+    /* Source Maps for Debugging */
+    "sourceMap": true,
+
+    /* Output Directory */
+    "outDir": "dist",
+
+    /* Root Directory */
+    "rootDir": ".",
+
+    /* Playwright Type Support */
+    "types": ["node","playwright"]
+  },
+
+  /* Include folders that contain .ts files */
+  "include": ["**/*.ts"],
+
+  /* Exclude unnecessary directories */
+  "exclude": [
+    "node_modules",
+    "playwright-report",
+    "test-results",
+    "dist"
+  ]
+}
