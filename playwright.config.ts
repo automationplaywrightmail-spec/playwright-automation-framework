@@ -20,7 +20,7 @@ export default defineConfig({
 
   use: {
     baseURL: 'https://www.saucedemo.com',  // So you can do page.goto('/') in tests
-    headless: false,                        // Show browser for learning
+    headless: true,      // on running on CI server this headless should be false
     viewport: { width: 1280, height: 720 },
     ignoreHTTPSErrors: true,
     screenshot: 'only-on-failure',
