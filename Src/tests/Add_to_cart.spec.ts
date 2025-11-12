@@ -5,6 +5,7 @@ import { AddCart } from '../Pages/Add_cart_Page'
 import { label, feature, story, severity, description, step, epic, owner } from 'allure-js-commons'
 // IMPORT TEST DATA FROM JSON FILE
 import testData from "../Utils/testdata.json";
+import { log } from 'console';
 
 
 
@@ -26,8 +27,9 @@ test(`Adding to cart : ${data.firstName}`, async ({ page }) => {
 
     await loginpage.goto();
     //Loading credentials from .env file created
-    const username = process.env.USER_NAME!;
-    const password = process.env.PASSWORD!;
+    const username = process.env.SAUCE_USERNAME!;
+    console.log('Loaded username:', process.env.SAUCE_USERNAME);
+    const password = process.env.SAUCE_PASSWORD!;
   
     await loginpage.login(username, password);
 

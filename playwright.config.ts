@@ -14,7 +14,7 @@ export default defineConfig({
   timeout:30000,
   reporter: [
     ['list'], // Show progress in terminal
-    ['html', { open: 'never' }], // Generate HTML report
+    ['html', { open: 'always' }], // Generate HTML report
     ['allure-playwright'], // Allure report integration
   ],
 
