@@ -8,6 +8,9 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    env:
+       SAUCE_USERNAME: ${{ fromJSON(secrets.CREDENTIALS).SAUCE_USERNAME }}
+       SAUCE_PASSWORD: ${{ fromJSON(secrets.CREDENTIALS).SAUCE_PASSWORD }}
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
