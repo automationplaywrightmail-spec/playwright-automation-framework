@@ -176,6 +176,31 @@ Keep test steps readable and business-oriented
 
 “Tests are written in a business-readable format — each test file focuses on verifying specific flows while delegating all page-level logic to the Page Object classes.”
 
+# Data Driven Testing - Integrating Excel 
+
+a) create a Folder (testdata)
+b) create a xlsx file inside it 
+c) Install required package to read Excel 
+    npm install xlsx
+d) Create a Utility File to Read Excel
+    /utils/excelUtils.ts
+
+Copy this Code :- 
+
+import * as XLSX from "xlsx";
+
+export class ExcelUtils {
+
+    static readExcel(filePath: string, sheetName: string) {
+        const workbook = XLSX.readFile(filePath);
+        const worksheet = workbook.Sheets[sheetName];
+        const jsonData: any[] = XLSX.utils.sheet_to_json(worksheet, { defval: "" });
+        return jsonData;
+    }
+
+}
+
+e) Use Excel Data in Your Test
 
 
 # CI/CD Integration Document Set Up

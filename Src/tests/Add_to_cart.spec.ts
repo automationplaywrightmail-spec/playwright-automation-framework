@@ -1,6 +1,9 @@
 import { test, expect } from '@playwright/test';
 import { login } from '../Pages/login'
 import { AddCart } from '../Pages/Add_cart_Page'
+import path from "path";
+// Import excel Utils into Test 
+//import {ExcelUtils} from '../Utils/excelUtils';
 // below import uses for customizing allure report
 import { label, feature, story, severity, description, step, epic, owner } from 'allure-js-commons'
 // IMPORT TEST DATA FROM JSON FILE
@@ -8,6 +11,10 @@ import testData from "../Utils/testdata.json";
 import { log } from 'console';
 
 
+// const filePath = path.resolve(__dirname, "../Utils/testdata.xlsx");
+// console.log("Resolved path =", filePath);
+// const sheetName = "Sheet1";
+// const testData = ExcelUtils.readExcel(filePath, sheetName);
 
 for (const data of testData){
 test(`Adding to cart : ${data.firstName}`, async ({ page }) => {
