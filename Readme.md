@@ -414,4 +414,4 @@ Configuring GITHUB ACTIONS for Running code on CI Server
 a) Go to playwright document Setting Up CI section 
 b) First we need to create .github\workflows folder
 c) Create playwright.yml file 
-d) By checking playwright.yml file , on every push & Pull code will automatically run 
+d) By checking playwright.yml file , on every push & Pull code will automatically run on CI Server
