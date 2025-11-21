@@ -59,7 +59,6 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
-
     steps:
       - name: Publish to GitHub Pages
         id: deployment
@@ -68,7 +67,6 @@ jobs:
   notify:
     needs: deploy_pages
     runs-on: ubuntu-latest
-
     steps:
       - name: Send Email Notification
         uses: dawidd6/action-send-mail@v3
@@ -80,17 +78,13 @@ jobs:
           subject: "Playwright Report Deployment - ${{ github.repository }}"
           to: ${{ secrets.EMAIL_TO }}
           from: Playwright CI <${{ secrets.SMTP_USERNAME }}>
+          secure: true
           html_body: |
-          <h2>Playwright CI/CD Execution Summary</h2>
-          <p><b>Status:</b> ${{ job.status }}</p>
-          <p><b>Branch:</b> ${{ github.ref }}</p>
-          <p><b>Triggered By:</b> ${{ github.actor }}</p>
-          <p><b>Commit:</b> ${{ github.sha }}</p>
+            <h2>Playwright CI/CD Execution Summary</h2>
+            <p><b>Status:</b> Success</p>
+            <p><b>Branch:</b> ${{ github.ref }}</p>
+            <p><b>Triggered By:</b> ${{ github.actor }}</p>
+            <p><b>Commit:</b> ${{ github.sha }}</p>
 
-          <h3>▶ View HTML Report</h3>
-          <a href="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/">
-            🔗 Click here to open Playwright Report
-          </a>
-
-          <br/><br/>
-          <i>This is an automated message sent by your CI/CD pipeline.</i>
+            <h3>▶ View HTML Report</h3>
+            <a href="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/">
