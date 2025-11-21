@@ -87,4 +87,4 @@ jobs:
             <p><b>Commit:</b> ${{ github.sha }}</p>
 
             <h3>▶ View HTML Report</h3>
-            <a href="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/">
+            <a href="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/index.html">🔗 Click here to open Playwright Report</a>
