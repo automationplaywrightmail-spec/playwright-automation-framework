@@ -35,7 +35,7 @@ test(`Adding to cart : ${data.firstName}`, async ({ page }) => {
     await loginpage.goto();
     //Loading credentials from .env file created
     const username = process.env.SAUCE_USERNAME!;
-    console.log('Loaded username:', process.env.SAUCE_USERNAME);
+  //  console.log('Loaded username:', process.env.SAUCE_USERNAME);
     const password = process.env.SAUCE_PASSWORD!;
   
     await loginpage.login(username, password);

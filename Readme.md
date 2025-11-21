@@ -521,3 +521,141 @@ Perfect for MNC/Mid-MNC CI/CD standards
 Enables faster debugging and visibility
 
 Works with any Playwright test suite
+
+
+
+PR ( Pull Request Workflow)
+
+✅ Pull Request (PR) Workflow – Step-by-Step
+
+Below are the exact steps followed in most MNCs and Mid-MNCs for raising and merging Pull Requests in a CI/CD pipeline.
+
+1️⃣ Create a New Branch
+
+Always create a separate branch for every new feature, bug fix, or test addition.
+
+git checkout -b feature/your-branch-name
+
+Examples:
+
+feature/add-login-tests
+
+bugfix/fix-locator-issue
+
+enhancement/improve-page-objects
+
+2️⃣ Make Code Changes
+
+Add/update your:
+
+Test cases
+
+Page Objects
+
+Utilities
+
+Config files
+
+Workflows (if required)
+
+3️⃣ Commit Your Changes
+git add .
+git commit -m "Added login test and updated POM structure"
+
+4️⃣ Push Branch to Remote
+git push origin feature/your-branch-name
+
+5️⃣ Create a Pull Request (PR)
+
+Go to your GitHub repository → navigate to:
+
+Pull Requests → New Pull Request
+
+
+Choose:
+
+Base branch → main
+
+Compare branch → feature/your-branch-name
+
+Add:
+
+Title
+
+Description
+
+Screenshots (if UI change)
+
+Test evidence
+
+Jira ID (if applicable)
+
+6️⃣ PR Triggers CI Pipeline
+
+In your workflow:
+
+pull_request:
+  branches: [ main, master ]
+
+
+Whenever a PR is created or updated:
+
+Playwright tests run
+
+Report is generated
+
+Status checks must pass
+
+Email/Slack notifications can be sent (optional)
+
+Deployment does NOT happen (good practice)
+
+This ensures quality before merging.
+
+7️⃣ Code Review
+
+Your teammates or lead reviewers:
+
+Review code
+
+Suggest changes
+
+Approve the PR
+
+You fix changes and push again:
+
+git push
+
+
+Pipeline runs again until everything passes.
+
+8️⃣ Merge PR
+
+After approvals + passing checks:
+
+Click:
+
+Merge Pull Request → Confirm Merge
+
+9️⃣ Cleanup
+
+After merging:
+
+git checkout main
+git pull
+git branch -d feature/your-branch-name
+
+
+(Removes old branch)
+
+🔟 CI Deploys Latest Changes (Post-Merge)
+
+Because your main workflow contains:
+
+on:
+  push:
+    branches: [ main ]
+
+
+Whenever PR is merged →
+GitHub Pages deployment starts automatically and the Playwright HTML report is updated.
