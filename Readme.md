@@ -422,3 +422,102 @@ git staus
 git add .
 git commit -m "Email notification"
 git push
+
+
+!Adding Email Notification on Deployement 
+
+📧 CI/CD Email Notification Integration
+
+This framework includes an automated Email Notification System as part of the CI/CD pipeline. After every pipeline execution on GitHub Actions, an email is delivered to the QA/Dev team with a detailed summary of the test run and a direct link to the hosted Playwright HTML Report.
+
+🔔 What the Email Contains
+
+Each notification email includes:
+
+✔ CI/CD Execution Status (Success / Failure)
+
+🔁 Branch used
+
+👤 Triggered By (the user who pushed the commit)
+
+🔗 Commit SHA
+
+📄 Direct Link to Playwright HTML Report (GitHub Pages)
+
+Example of the email received:
+
+⚙️ How Email Notification Works
+
+A dedicated job (notify) runs after:
+
+Tests are executed
+
+The Playwright HTML report is generated
+
+The report is successfully deployed to GitHub Pages
+
+This job uses the GitHub Action:
+
+dawidd6/action-send-mail@v3
+
+
+It sends a fully formatted HTML email to the configured recipient.
+
+🔐 Required GitHub Secrets
+
+Configure these secrets in:
+
+Settings → Secrets and variables → Actions → New repository secret
+
+Secret Name	Description
+SMTP_SERVER	SMTP server (e.g., smtp.gmail.com)
+SMTP_PORT	SMTP port (465 for SSL)
+SMTP_USERNAME	Your email address
+SMTP_PASSWORD	App password (Gmail / Outlook app password)
+EMAIL_TO	Email address that receives the notifications
+📄 Email Notification Code (Used in deploy.yml)
+
+Here is the exact job used:
+
+notify:
+  needs: deploy_pages
+  runs-on: ubuntu-latest
+
+  steps:
+    - name: Send Email Notification
+      uses: dawidd6/action-send-mail@v3
+      with:
+        server_address: ${{ secrets.SMTP_SERVER }}
+        server_port: ${{ secrets.SMTP_PORT }}
+        username: ${{ secrets.SMTP_USERNAME }}
+        password: ${{ secrets.SMTP_PASSWORD }}
+        subject: "Playwright Report Deployment - ${{ github.repository }}"
+        to: ${{ secrets.EMAIL_TO }}
+        from: Playwright CI <${{ secrets.SMTP_USERNAME }}>
+        secure: true
+        html_body: |
+          <h2>Playwright CI/CD Execution Summary</h2>
+          <p><b>Status:</b> ${{ job.status }}</p>
+          <p><b>Branch:</b> ${{ github.ref }}</p>
+          <p><b>Triggered By:</b> ${{ github.actor }}</p>
+          <p><b>Commit:</b> ${{ github.sha }}</p>
+
+          <h3>▶ View HTML Report</h3>
+          <a href="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/">
+            🔗 Click here to open Playwright Report
+          </a>
+
+          <br/><br/>
+          <i>This is an automated message sent by your CI/CD pipeline.</i>
+
+🎯 Benefits of This Integration
+
+Automated report sharing — no manual steps
+
+Ideal for distributed QA teams
+
+Perfect for MNC/Mid-MNC CI/CD standards
+
+Enables faster debugging and visibility
+
+Works with any Playwright test suite
