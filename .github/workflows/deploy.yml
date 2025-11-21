@@ -30,7 +30,7 @@ jobs:
 
       - name: Run Playwright tests
         run: npx playwright test --reporter=html
-        continue-on-error: true   # prevents deploy failure if tests fail
+        continue-on-error: true
 
       - name: Upload Playwright report as artifact
         uses: actions/upload-artifact@v4
@@ -64,3 +64,34 @@ jobs:
       - name: Publish to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  notify:
+    needs: deploy_pages
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Send Email Notification
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: ${{ secrets.SMTP_SERVER }}
+          server_port: ${{ secrets.SMTP_PORT }}
+          username: ${{ secrets.SMTP_USERNAME }}
+          password: ${{ secrets.SMTP_PASSWORD }}
+          subject: "Playwright Report Deployment - ${{ github.repository }}"
+          to: ${{ secrets.EMAIL_TO }}
+          from: Playwright CI <${{ secrets.SMTP_USERNAME }}>
+          html_body: text/html
+          body: |
+            <h2>Playwright CI/CD Execution Summary</h2>
+            <p><b>Status:</b> ${{ job.status }}</p>
+            <p><b>Branch:</b> ${{ github.ref }}</p>
+            <p><b>Triggered By:</b> ${{ github.actor }}</p>
+            <p><b>Commit:</b> ${{ github.sha }}</p>
+
+            <h3>▶ View HTML Report</h3>
+            <a href="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/">
+              🔗 Click here to open Playwright Report
+            </a>
+
+            <br/><br/>
+            <i>This is an automated message sent by your CI/CD pipeline.</i>
