@@ -80,18 +80,17 @@ jobs:
           subject: "Playwright Report Deployment - ${{ github.repository }}"
           to: ${{ secrets.EMAIL_TO }}
           from: Playwright CI <${{ secrets.SMTP_USERNAME }}>
-          html_body: text/html
-          body: |
-            <h2>Playwright CI/CD Execution Summary</h2>
-            <p><b>Status:</b> ${{ job.status }}</p>
-            <p><b>Branch:</b> ${{ github.ref }}</p>
-            <p><b>Triggered By:</b> ${{ github.actor }}</p>
-            <p><b>Commit:</b> ${{ github.sha }}</p>
+          html_body: |
+          <h2>Playwright CI/CD Execution Summary</h2>
+          <p><b>Status:</b> ${{ job.status }}</p>
+          <p><b>Branch:</b> ${{ github.ref }}</p>
+          <p><b>Triggered By:</b> ${{ github.actor }}</p>
+          <p><b>Commit:</b> ${{ github.sha }}</p>
 
-            <h3>▶ View HTML Report</h3>
-            <a href="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/">
-              🔗 Click here to open Playwright Report
-            </a>
+          <h3>▶ View HTML Report</h3>
+          <a href="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/">
+            🔗 Click here to open Playwright Report
+          </a>
 
-            <br/><br/>
-            <i>This is an automated message sent by your CI/CD pipeline.</i>
+          <br/><br/>
+          <i>This is an automated message sent by your CI/CD pipeline.</i>

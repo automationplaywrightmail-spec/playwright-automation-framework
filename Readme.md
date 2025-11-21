@@ -415,3 +415,10 @@ a) Go to playwright document Setting Up CI section
 b) First we need to create .github\workflows folder
 c) Create playwright.yml file 
 d) By checking playwright.yml file , on every push & Pull code will automatically run on CI Server
+
+
+!To Push Latest change 
+git staus 
+git add .
+git commit -m "Email notification"
+git push
