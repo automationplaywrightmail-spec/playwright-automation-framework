@@ -78,7 +78,7 @@ jobs:
           subject: "Playwright Report Deployment - ${{ github.repository }}"
           to: ${{ secrets.EMAIL_TO }}
           from: Playwright CI <${{ secrets.SMTP_USERNAME }}>
-          secure: true
+          secure: false # Set to true if your SMTP server requires SSL/TLS 
           html_body: |
             <h2>Playwright CI/CD Execution Summary</h2>
             <p><b>Status:</b> Success</p>
